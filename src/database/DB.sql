@@ -34,7 +34,8 @@ CREATE TABLE WorkshopClient(
 CREATE TABLE WorkshopLocation(
     locationId INTEGER AUTO_INCREMENT,
     locationName VARCHAR(255) NOT NULL,
-    locationCoordinates POINT NOT NULL,
+    locationLatitude DECIMAL(10, 8) NOT NULL,
+    locationLongitude DECIMAL(10, 8) NOT NULL,
     locationAddress VARCHAR(255) NOT NULL,
     PRIMARY KEY (locationId)
 );
