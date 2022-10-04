@@ -128,6 +128,32 @@ CREATE TABLE WorkshopWorkOrder(
     FOREIGN KEY (advisorId) REFERENCES WorkshopAdvisor(advisorId)
 );
 
+CREATE TABLE WorkshopPurchaseOrder(
+	workPurchaseOrderId INTEGER AUTO_INCREMENT,
+    workOrderId INTEGER NOT NULL,
+    pieceVehicleId INTEGER NOT NULL,
+    distributorPieceId VARCHAR(255) NOT NULL,
+    priceU DECIMAL(10, 2) NOT NULL,
+    quantity INTEGER NOT NULL,
+    PRIMARY KEY(workPurchaseOrderId),
+    FOREIGN KEY (workOrderId) REFERENCES WorkshopWorkOrder(workOrderId),
+    FOREIGN KEY(pieceVehicleId) REFERENCES WorkshopVehiclePiece(pieceId)
+);
+
+CREATE TABLE WorkshopAdvisorRatedService(
+	advisorRateId INTEGER AUTO_INCREMENT,
+    advisorId INTEGER NOT NULL,
+    workOrderId INTEGER NOT NULL,
+    clientId INTEGER NOT NULL,
+    clientScore SMALLINT NOT NULL,
+    clientComment VARCHAR(255) NOT NULL,
+    PRIMARY KEY (advisorRateId),
+    FOREIGN KEY (advisorId) REFERENCES WorkshopAdvisor(advisorId),
+    FOREIGN KEY (clientId) REFERENCES WorkshopClient(clientId),
+    FOREIGN KEY (workOrderId) REFERENCES WorkshopWorkOrder(workOrderId)
+);
+
+
 CREATE TABLE WorkshopWorkOrderDetail(
     workOrderDetailId INTEGER AUTO_INCREMENT,
     workOrderId INTEGER NOT NULL,
@@ -161,12 +187,10 @@ CREATE TABLE WorkshopPayment(
 
 CREATE TABLE WorkshopBill(
     workshopBillId INTEGER AUTO_INCREMENT,
-    clientId INTEGER NOT NULL,
     paymentId INTEGER NOT NULL,
     billName VARCHAR(255) NOT NULL,
     billNit VARCHAR(255) NOT NULL,
     PRIMARY KEY (workshopBillId),
-    FOREIGN KEY (clientId) REFERENCES WorkshopClient(clientId),
     FOREIGN KEY (paymentId) REFERENCES WorkshopPayment(paymentId)
 );
 
