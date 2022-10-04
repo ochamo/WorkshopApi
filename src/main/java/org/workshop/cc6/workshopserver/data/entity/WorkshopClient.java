@@ -1,15 +1,17 @@
 package org.workshop.cc6.workshopserver.data.entity;
 
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Table(name = "workshopclient")
 @Getter
 @Setter
+@EqualsAndHashCode
 public class WorkshopClient {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,30 +32,18 @@ public class WorkshopClient {
     @Column(length = 20)
     private String clientPhoneNumber;
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+    @OneToMany(mappedBy = "workshopClient")
+    @EqualsAndHashCode.Exclude
+    private Set<WorkshopClientVehicle> workshopClientVehicles;
 
-        WorkshopClient that = (WorkshopClient) o;
+    @OneToMany(mappedBy = "clientPayment")
+    @EqualsAndHashCode.Exclude
+    private Set<WorkshopPayment> workshopPayments;
 
-        if (!Objects.equals(clientId, that.clientId)) return false;
-        if (!Objects.equals(userId, that.userId)) return false;
-        if (!Objects.equals(clientName, that.clientName)) return false;
-        if (!Objects.equals(clientLastName, that.clientLastName))
-            return false;
-        if (!Objects.equals(clientDpi, that.clientDpi)) return false;
-        return Objects.equals(clientPhoneNumber, that.clientPhoneNumber);
-    }
+    @OneToMany(mappedBy = "appointmentClient")
+    @EqualsAndHashCode.Exclude
+    private Set<WorkshopAppointment> workshopAppointments;
 
-    @Override
-    public int hashCode() {
-        int result = clientId != null ? clientId.hashCode() : 0;
-        result = 31 * result + (userId != null ? userId.hashCode() : 0);
-        result = 31 * result + (clientName != null ? clientName.hashCode() : 0);
-        result = 31 * result + (clientLastName != null ? clientLastName.hashCode() : 0);
-        result = 31 * result + (clientDpi != null ? clientDpi.hashCode() : 0);
-        result = 31 * result + (clientPhoneNumber != null ? clientPhoneNumber.hashCode() : 0);
-        return result;
-    }
+    @OneToMany(mappedBy = "ratingClient")
+    private Set<WorkshopAdvisorRatedService> workshopAdvisorRatedServices;
 }
