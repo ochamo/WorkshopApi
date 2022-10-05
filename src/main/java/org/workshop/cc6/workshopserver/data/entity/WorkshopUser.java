@@ -7,7 +7,7 @@ import lombok.Setter;
 import javax.persistence.*;
 
 @Entity
-@Table(name="WorkshopUser")
+@Table(name="workshopuser")
 @Getter
 @Setter
 @EqualsAndHashCode

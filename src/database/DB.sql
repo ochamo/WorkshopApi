@@ -10,14 +10,21 @@ CREATE TABLE WorkshopUserRole(
     PRIMARY KEY (userRoleId)
 );
 
+INSERT INTO WorkshopUserRole(userRoleDescription) VALUES ('admin');
+INSERT INTO WorkshopUserRole(userRoleDescription) VALUES ('advisor');
+INSERT INTO WorkshopUserRole(userRoleDescription) VALUES ('client');
+
 CREATE TABLE WorkshopUser(
     userId INTEGER AUTO_INCREMENT,
     userRoleId TINYINT NOT NULL,
-    userPass VARCHAR(20) NOT NULL,
+    userPass VARCHAR(255) NOT NULL,
     userEmail VARCHAR(255) NOT NULL,
     PRIMARY KEY (userId),
     FOREIGN KEY (userRoleId) REFERENCES WorkshopUserRole(userRoleId)
 );
+
+INSERT INTO WorkshopUser(userRoleId, userPass, userEmail) VALUES(1, 'cheleyotto98@gmail.com', '$2a$12$XTFUEWPTXdxKXnW5/ktys.0qcNAys5BYlsfoyS7g55cpwC5g6YXLC');
+
 
 CREATE TABLE WorkshopClient(
   clientId INTEGER AUTO_INCREMENT,

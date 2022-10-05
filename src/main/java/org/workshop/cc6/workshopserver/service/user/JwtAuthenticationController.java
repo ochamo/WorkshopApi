@@ -7,6 +7,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.DisabledException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 import org.workshop.cc6.workshopserver.dto.user.LoginRequest;
@@ -15,16 +16,22 @@ import org.workshop.cc6.workshopserver.util.JwtTokenUtil;
 
 @RestController
 @CrossOrigin
+@RequestMapping("/auth")
 public class JwtAuthenticationController {
 
-    @Autowired
-    private AuthenticationManager authenticationManager;
+    private final AuthenticationManager authenticationManager;
+    private final JwtTokenUtil jwtTokenUtil;
+
+    private final JwtUserDetailsService userDetailsService;
 
     @Autowired
-    private JwtTokenUtil jwtTokenUtil;
-
-    @Autowired
-    private JwtUserDetailsService userDetailsService;
+    public JwtAuthenticationController(AuthenticationManager authenticationManager,
+                                       JwtTokenUtil jwtTokenUtil,
+                                       JwtUserDetailsService userDetailsService) {
+        this.authenticationManager = authenticationManager;
+        this.jwtTokenUtil = jwtTokenUtil;
+        this.userDetailsService = userDetailsService;
+    }
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public ResponseEntity<?> createAuthenticationToken(@RequestBody LoginRequest authenticationRequest) throws Exception {
@@ -35,7 +42,7 @@ public class JwtAuthenticationController {
                 .loadUserByUsername(authenticationRequest.getUserEmail());
 
         if (userDetails == null) {
-            return new ResponseEntity<>("No user found", HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>("Not authenticated", HttpStatus.UNAUTHORIZED);
         }
 
         final String token = jwtTokenUtil.generateToken(authenticationRequest);
@@ -50,6 +57,8 @@ public class JwtAuthenticationController {
             throw new Exception("USER_DISABLED", e);
         } catch (BadCredentialsException e) {
             throw new Exception("INVALID_CREDENTIALS", e);
+        } catch (AuthenticationException e) {
+            throw new Exception(("Exception "), e);
         }
     }
 

@@ -26,5 +26,5 @@ public class WorkshopVehiclePiece {
     private WorkshopVehicleModel workshopPieceModel;
 
     @OneToMany(mappedBy = "vehiclePiece")
-    private Set<WorkshopVehiclePiece> workshopVehiclePieces;
+    private Set<WorkshopPurchaseOrder> workshopVehiclePieces;
 }
