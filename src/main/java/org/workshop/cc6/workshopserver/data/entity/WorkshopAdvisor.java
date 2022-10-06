@@ -41,6 +41,9 @@ public class WorkshopAdvisor {
     private String advisorAddress;
 
     @Column
+    private Byte deleted;
+
+    @Column
     @CreationTimestamp
     private LocalDateTime advisorHiringDate;
 

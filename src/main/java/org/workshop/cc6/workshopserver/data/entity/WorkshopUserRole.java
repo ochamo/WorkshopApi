@@ -25,4 +25,7 @@ public class WorkshopUserRole {
     @EqualsAndHashCode.Exclude
     private Set<WorkshopUser> users;
 
+    @Column
+    private Byte deleted;
+
 }

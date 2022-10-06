@@ -5,7 +5,6 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
@@ -35,4 +34,7 @@ public class WorkshopAppointment {
 
     @Column
     private LocalDateTime appointmentTime;
+
+    @Column
+    private Byte deleted;
 }

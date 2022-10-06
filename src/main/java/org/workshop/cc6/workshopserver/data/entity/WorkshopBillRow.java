@@ -30,4 +30,7 @@ public class WorkshopBillRow {
 
     @Column
     private BigDecimal unitPrice;
+
+    @Column
+    private Byte deleted;
 }

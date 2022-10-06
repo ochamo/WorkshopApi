@@ -27,4 +27,7 @@ public class WorkshopWorkOrderDetail {
     @ManyToOne
     @JoinColumn(name = "pieceStatus")
     private WorkshopPieceStatus workshopPieceStatus;
+
+    @Column
+    private Byte deleted;
 }

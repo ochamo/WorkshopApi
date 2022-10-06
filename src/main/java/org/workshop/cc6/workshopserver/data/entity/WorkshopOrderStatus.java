@@ -23,4 +23,7 @@ public class WorkshopOrderStatus {
     @OneToMany(mappedBy = "workshopOrderStatus")
     @EqualsAndHashCode.Exclude
     private Set<WorkshopWorkOrder> workshopWorkOrders;
+
+    @Column
+    private Byte deleted;
 }

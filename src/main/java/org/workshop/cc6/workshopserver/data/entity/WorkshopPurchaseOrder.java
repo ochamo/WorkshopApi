@@ -33,4 +33,7 @@ public class WorkshopPurchaseOrder {
 
     @Column
     private Integer quantity;
+
+    @Column
+    private Byte deleted;
 }

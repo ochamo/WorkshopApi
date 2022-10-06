@@ -5,7 +5,6 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.Objects;
 import java.util.Set;
 
 @Entity
@@ -32,4 +31,7 @@ public class WorkshopClientVehicle {
     @OneToMany(mappedBy = "clientVehicle")
     @EqualsAndHashCode.Exclude
     private Set<WorkshopWorkOrder> workshopWorkOrders;
+
+    @Column
+    private Byte deleted;
 }

@@ -22,4 +22,7 @@ public class WorkshopWorkOrderGallery {
 
     @Column
     private String imagePath;
+
+    @Column
+    private Byte deleted;
 }

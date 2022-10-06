@@ -25,4 +25,7 @@ public class WorkshopUser {
     @JoinColumn(name = "userRoleId")
     private WorkshopUserRole userRoleId;
 
+    @Column
+    private Byte deleted;
+
 }

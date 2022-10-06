@@ -30,4 +30,7 @@ public class WorkshopBill {
     @OneToMany(mappedBy = "bill")
     @EqualsAndHashCode.Exclude
     private Set<WorkshopBillRow> workshopBillRowSet;
+
+    @Column
+    private Byte deleted;
 }

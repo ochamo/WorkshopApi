@@ -27,4 +27,7 @@ public class WorkshopVehiclePiece {
 
     @OneToMany(mappedBy = "vehiclePiece")
     private Set<WorkshopPurchaseOrder> workshopVehiclePieces;
+
+    @Column
+    private Byte deleted;
 }

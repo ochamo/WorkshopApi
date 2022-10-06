@@ -33,4 +33,7 @@ public class WorkshopLocation {
     @OneToMany(mappedBy = "appointmentLocation")
     @EqualsAndHashCode.Exclude
     private Set<WorkshopAppointment> workshopAppointmentSet;
+
+    @Column
+    private Byte deleted;
 }

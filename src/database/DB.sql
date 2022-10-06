@@ -19,11 +19,12 @@ CREATE TABLE WorkshopUser(
     userRoleId TINYINT NOT NULL,
     userPass VARCHAR(255) NOT NULL,
     userEmail VARCHAR(255) NOT NULL,
+    deleted TINYINT DEFAULT 0 NOT NULL,
     PRIMARY KEY (userId),
     FOREIGN KEY (userRoleId) REFERENCES WorkshopUserRole(userRoleId)
 );
 
-INSERT INTO WorkshopUser(userRoleId, userPass, userEmail) VALUES(1, 'cheleyotto98@gmail.com', '$2a$12$XTFUEWPTXdxKXnW5/ktys.0qcNAys5BYlsfoyS7g55cpwC5g6YXLC');
+INSERT INTO WorkshopUser(userRoleId, userEmail, userPass) VALUES(1, 'cheleyotto98@gmail.com', '$2a$12$XTFUEWPTXdxKXnW5/ktys.0qcNAys5BYlsfoyS7g55cpwC5g6YXLC');
 
 
 CREATE TABLE WorkshopClient(
@@ -33,6 +34,7 @@ CREATE TABLE WorkshopClient(
   clientLastName VARCHAR(255) NOT NULL,
   clientDpi VARCHAR(20) NOT NULL,
   clientPhoneNumber VARCHAR(20) NOT NULL,
+  deleted TINYINT DEFAULT 0 NOT NULL,
   PRIMARY KEY(clientId),
   FOREIGN KEY (userId) REFERENCES WorkshopUser(userId),
   UNIQUE(userId)
@@ -44,6 +46,7 @@ CREATE TABLE WorkshopLocation(
     locationLatitude DECIMAL(10, 8) NOT NULL,
     locationLongitude DECIMAL(10, 8) NOT NULL,
     locationAddress VARCHAR(255) NOT NULL,
+    deleted TINYINT DEFAULT 0 NOT NULL,
     PRIMARY KEY (locationId)
 );
 
@@ -57,6 +60,7 @@ CREATE TABLE WorkshopAdvisor(
     advisorPhoneNumber VARCHAR(20) NOT NULL,
     advisorAddress VARCHAR(20) NOT NULL,
     advisorHiringDate DATE NOT NULL,
+	deleted TINYINT DEFAULT 0 NOT NULL,
     PRIMARY KEY (advisorId),
     FOREIGN KEY (userId) REFERENCES WorkshopUser(userId),
     FOREIGN KEY (advisorLocation) REFERENCES WorkshopLocation(locationId),
@@ -66,6 +70,7 @@ CREATE TABLE WorkshopAdvisor(
 CREATE TABLE WorkshopVehicleBrand(
     brandId INTEGER AUTO_INCREMENT,
     brandName VARCHAR(255) NOT NULL,
+    deleted TINYINT DEFAULT 0 NOT NULL,
     PRIMARY KEY(brandId)
 );
 
@@ -73,6 +78,7 @@ CREATE TABLE WorkshopVehicleLine(
     lineId INTEGER AUTO_INCREMENT,
     brandId INTEGER NOT NULL,
     lineName VARCHAR(255) NOT NULL,
+    deleted TINYINT DEFAULT 0 NOT NULL,
     PRIMARY KEY (lineId),
     FOREIGN KEY (brandId) REFERENCES WorkshopVehicleBrand(brandId)
 );
@@ -81,6 +87,7 @@ CREATE TABLE WorkshopVehicleModel(
     modelId INTEGER AUTO_INCREMENT,
     modelLine INTEGER NOT NULL,
     modelYear VARCHAR(4) NOT NULL,
+    deleted TINYINT DEFAULT 0 NOT NULL,
     PRIMARY KEY(modelId),
     FOREIGN KEY (modelLine) REFERENCES WorkshopVehicleLine(lineId)
 );
@@ -90,6 +97,7 @@ CREATE TABLE WorkshopClientVehicle(
     clientId INTEGER NOT NULL,
     vehicleModelId INTEGER NOT NULL,
     vehiclePlate VARCHAR(20) NOT NULL,
+    deleted TINYINT DEFAULT 0 NOT NULL,
     PRIMARY KEY (vehicleId),
     FOREIGN KEY (clientId) REFERENCES WorkshopClient(clientId),
     FOREIGN KEY (vehicleModelId) REFERENCES WorkshopVehicleModel(modelId)
@@ -98,6 +106,7 @@ CREATE TABLE WorkshopClientVehicle(
 CREATE TABLE WorkshopPieceType(
     pieceTypeId INTEGER AUTO_INCREMENT,
     pieceName VARCHAR(255) NOT NULL,
+    deleted TINYINT DEFAULT 0 NOT NULL,
     PRIMARY KEY (pieceTypeId)
 );
 
@@ -105,6 +114,7 @@ CREATE TABLE WorkshopVehiclePiece(
     pieceId INTEGER AUTO_INCREMENT,
     pieceModel INTEGER NOT NULL,
     pieceType INTEGER NOT NULL,
+    deleted TINYINT DEFAULT 0 NOT NULL,
     PRIMARY KEY (pieceId),
     FOREIGN KEY (pieceModel) REFERENCES WorkshopVehicleModel(modelId),
     FOREIGN KEY (pieceType) REFERENCES WorkshopPieceType(pieceTypeId)
@@ -113,12 +123,14 @@ CREATE TABLE WorkshopVehiclePiece(
 CREATE TABLE WorkshopPieceStatus(
     pieceStatusId INTEGER AUTO_INCREMENT,
     pieceStatusDescription VARCHAR(255) NOT NULL,
+    deleted TINYINT DEFAULT 0 NOT NULL,
     PRIMARY KEY (pieceStatusId)
 );
 
 CREATE TABLE WorkshopOrderStatus(
     workOrderStatusId INTEGER AUTO_INCREMENT,
     wokrOrderStatusDescription VARCHAR(255) NOT NULL,
+    deleted TINYINT DEFAULT 0 NOT NULL,
     PRIMARY KEY (workOrderStatusId)
 );
 
@@ -129,6 +141,7 @@ CREATE TABLE WorkshopWorkOrder(
     advisorId INTEGER NOT NULL,
     creationDate DATETIME NOT NULL,
     completionDate DATETIME NULL,
+    deleted TINYINT DEFAULT 0 NOT NULL,
     PRIMARY KEY (workOrderId),
     FOREIGN KEY (workOrderStatus) REFERENCES WorkshopOrderStatus(workOrderStatusId),
     FOREIGN KEY (clientVehicle) REFERENCES WorkshopClientVehicle(vehicleId),
@@ -142,6 +155,7 @@ CREATE TABLE WorkshopPurchaseOrder(
     distributorPieceId VARCHAR(255) NOT NULL,
     priceU DECIMAL(10, 2) NOT NULL,
     quantity INTEGER NOT NULL,
+    deleted TINYINT DEFAULT 0 NOT NULL,
     PRIMARY KEY(workPurchaseOrderId),
     FOREIGN KEY (workOrderId) REFERENCES WorkshopWorkOrder(workOrderId),
     FOREIGN KEY(pieceVehicleId) REFERENCES WorkshopVehiclePiece(pieceId)
@@ -154,6 +168,7 @@ CREATE TABLE WorkshopAdvisorRatedService(
     clientId INTEGER NOT NULL,
     clientScore SMALLINT NOT NULL,
     clientComment VARCHAR(255) NOT NULL,
+    deleted TINYINT DEFAULT 0 NOT NULL,
     PRIMARY KEY (advisorRateId),
     FOREIGN KEY (advisorId) REFERENCES WorkshopAdvisor(advisorId),
     FOREIGN KEY (clientId) REFERENCES WorkshopClient(clientId),
@@ -166,6 +181,7 @@ CREATE TABLE WorkshopWorkOrderDetail(
     workOrderId INTEGER NOT NULL,
     pieceTypeVehicle INTEGER NOT NULL,
     pieceStatus INTEGER NOT NULL,
+    deleted TINYINT DEFAULT 0 NOT NULL,
     PRIMARY KEY (workOrderDetailId),
     FOREIGN KEY (workOrderId) REFERENCES WorkshopWorkOrder(workOrderId),
     FOREIGN KEY (pieceTypeVehicle) REFERENCES WorkshopPieceType(pieceTypeId),
@@ -176,6 +192,7 @@ CREATE TABLE WorkshopWorkOrderGallery(
     workOrderImageId INTEGER AUTO_INCREMENT NOT NULL,
     workOrderId INTEGER NOT NULL,
     imagePath LONGTEXT NOT NULL,
+    deleted TINYINT DEFAULT 0 NOT NULL,
     PRIMARY KEY (workOrderImageId),
     FOREIGN KEY (workOrderId) REFERENCES WorkshopWorkOrder(workOrderId)
 );
@@ -187,6 +204,7 @@ CREATE TABLE WorkshopPayment(
     cardNum VARCHAR(20) NOT NULL,
     paymentDate DATETIME NOT NULL,
     total DECIMAL(10, 2) NOT NULL,
+    deleted TINYINT DEFAULT 0 NOT NULL,
     PRIMARY KEY (paymentId),
     FOREIGN KEY (clientId) REFERENCES WorkshopClient(clientId),
     FOREIGN KEY (orderId) REFERENCES WorkshopWorkOrder(workOrderId)
@@ -197,6 +215,7 @@ CREATE TABLE WorkshopBill(
     paymentId INTEGER NOT NULL,
     billName VARCHAR(255) NOT NULL,
     billNit VARCHAR(255) NOT NULL,
+    deleted TINYINT DEFAULT 0 NOT NULL,
     PRIMARY KEY (workshopBillId),
     FOREIGN KEY (paymentId) REFERENCES WorkshopPayment(paymentId)
 );
@@ -207,6 +226,7 @@ CREATE TABLE WorkshopBillRow(
     pieceIdCode INTEGER NOT NULL,
     quantity INTEGER NOT NULL,
     unitPrice DECIMAL(10, 2) NOT NULL,
+    deleted TINYINT DEFAULT 0 NOT NULL,
     PRIMARY KEY (billRowId),
     FOREIGN KEY (billId) REFERENCES WorkshopBill(workshopBillId),
     FOREIGN KEY (pieceIdCode) REFERENCES WorkshopVehiclePiece(pieceId)
@@ -219,6 +239,7 @@ CREATE TABLE WorkshopAppointment(
     appointmentDate DATE NOT NULL,
     appointTime DATETIME NOT NULL,
     locationId INTEGER NOT NULL,
+    deleted TINYINT DEFAULT 0 NOT NULL,
     PRIMARY KEY (appointmentId),
     FOREIGN KEY (clientId) REFERENCES WorkshopClient(clientId),
     FOREIGN KEY (advisorId) REFERENCES WorkshopAdvisor(advisorId),

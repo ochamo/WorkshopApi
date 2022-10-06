@@ -40,4 +40,7 @@ public class WorkshopPayment {
     @OneToMany(mappedBy = "billPayment")
     @EqualsAndHashCode.Exclude
     private Set<WorkshopBill> workshopBillSet;
+
+    @Column
+    private Byte deleted;
 }

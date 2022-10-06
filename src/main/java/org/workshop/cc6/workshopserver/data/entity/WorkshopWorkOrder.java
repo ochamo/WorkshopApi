@@ -6,7 +6,6 @@ import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
-import java.sql.Date;
 import java.time.LocalDateTime;
 import java.util.Set;
 
@@ -58,4 +57,7 @@ public class WorkshopWorkOrder {
     @OneToMany(mappedBy = "purchaseOrderCode")
     @EqualsAndHashCode.Exclude
     private Set<WorkshopPurchaseOrder> workshopPurchaseOrders;
+
+    @Column
+    private Byte deleted;
 }

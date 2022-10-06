@@ -31,4 +31,7 @@ public class WorkshopVehicleModel {
     @EqualsAndHashCode.Exclude
     private Set<WorkshopClientVehicle> clientVehicles;
 
+    @Column
+    private Byte deleted;
+
 }
