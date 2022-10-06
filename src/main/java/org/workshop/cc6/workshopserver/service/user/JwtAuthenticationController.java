@@ -10,8 +10,8 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
-import org.workshop.cc6.workshopserver.dto.user.LoginRequest;
-import org.workshop.cc6.workshopserver.dto.user.LoginResponse;
+import org.workshop.cc6.workshopserver.dto.user.request.LoginRequest;
+import org.workshop.cc6.workshopserver.dto.user.response.LoginResponse;
 import org.workshop.cc6.workshopserver.util.JwtTokenUtil;
 
 @RestController

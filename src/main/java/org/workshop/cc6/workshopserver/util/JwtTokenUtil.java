@@ -6,7 +6,7 @@ import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
-import org.workshop.cc6.workshopserver.dto.user.LoginRequest;
+import org.workshop.cc6.workshopserver.dto.user.request.LoginRequest;
 
 import java.io.Serializable;
 import java.util.Date;

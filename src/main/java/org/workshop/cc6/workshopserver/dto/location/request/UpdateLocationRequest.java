@@ -1,4 +1,4 @@
-package org.workshop.cc6.workshopserver.dto.user;
+package org.workshop.cc6.workshopserver.dto.location.request;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -11,9 +11,10 @@ import java.math.BigDecimal;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class CreateLocationRequest {
+public class UpdateLocationRequest {
+    private Integer id;
     private String locationName;
-    private BigDecimal locationLatitude;
-    private BigDecimal locationLongitude;
+    private BigDecimal locationLat;
+    private BigDecimal locationLong;
     private String locationAddr;
 }

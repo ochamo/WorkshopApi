@@ -1,4 +1,4 @@
-package org.workshop.cc6.workshopserver.dto.user;
+package org.workshop.cc6.workshopserver.dto.brand.request;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -7,8 +7,8 @@ import lombok.Setter;
 
 @Getter
 @Setter
-@AllArgsConstructor
 @NoArgsConstructor
-public class LoginResponse {
-    private String token;
+@AllArgsConstructor
+public class CreateBrandRequest {
+    private String brandName;
 }

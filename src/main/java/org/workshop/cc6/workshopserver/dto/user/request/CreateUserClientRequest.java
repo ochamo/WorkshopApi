@@ -1,4 +1,4 @@
-package org.workshop.cc6.workshopserver.dto.user;
+package org.workshop.cc6.workshopserver.dto.user.request;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
