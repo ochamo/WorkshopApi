@@ -20,12 +20,11 @@ public class WorkshopUser {
     private String userPass;
     @Column
     private String userEmail;
+    @Column(insertable = false)
+    private Byte deleted;
 
     @ManyToOne
     @JoinColumn(name = "userRoleId")
     private WorkshopUserRole userRoleId;
-
-    @Column
-    private Byte deleted;
 
 }

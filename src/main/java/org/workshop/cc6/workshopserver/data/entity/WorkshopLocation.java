@@ -34,6 +34,6 @@ public class WorkshopLocation {
     @EqualsAndHashCode.Exclude
     private Set<WorkshopAppointment> workshopAppointmentSet;
 
-    @Column
+    @Column(insertable = false)
     private Byte deleted;
 }

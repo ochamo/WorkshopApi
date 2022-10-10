@@ -8,7 +8,7 @@ import javax.persistence.*;
 import java.util.Set;
 
 @Entity
-@Table(name = "WorkshopUserRole")
+@Table(name = "workshopuserrole")
 @Getter
 @Setter
 @EqualsAndHashCode
@@ -25,7 +25,7 @@ public class WorkshopUserRole {
     @EqualsAndHashCode.Exclude
     private Set<WorkshopUser> users;
 
-    @Column
+    @Column(insertable = false)
     private Byte deleted;
 
 }

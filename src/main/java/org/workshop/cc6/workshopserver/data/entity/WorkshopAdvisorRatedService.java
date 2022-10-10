@@ -34,6 +34,5 @@ public class WorkshopAdvisorRatedService {
     @Column
     private String clientComment;
 
-    @Column
-    private Byte deleted;
+    @Column(insertable = false)    private Byte deleted;
 }

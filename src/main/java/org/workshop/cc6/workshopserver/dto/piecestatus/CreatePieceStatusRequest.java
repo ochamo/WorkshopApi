@@ -1,4 +1,4 @@
-package org.workshop.cc6.workshopserver.dto.brand.request;
+package org.workshop.cc6.workshopserver.dto.piecestatus;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -9,7 +9,6 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class CreateVehicleLineRequest {
-    private Integer brandId;
-    private String lineName;
+public class CreatePieceStatusRequest {
+    private String pieceStatusDescription;
 }

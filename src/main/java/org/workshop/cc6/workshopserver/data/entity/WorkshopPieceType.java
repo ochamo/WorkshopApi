@@ -28,6 +28,6 @@ public class WorkshopPieceType {
     @EqualsAndHashCode.Exclude
     private Set<WorkshopWorkOrderDetail> workshopWorkOrderDetails;
 
-    @Column
+    @Column(insertable = false)
     private Byte deleted;
 }

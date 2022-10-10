@@ -35,6 +35,6 @@ public class WorkshopAppointment {
     @Column
     private LocalDateTime appointmentTime;
 
-    @Column
+    @Column(insertable = false)
     private Byte deleted;
 }

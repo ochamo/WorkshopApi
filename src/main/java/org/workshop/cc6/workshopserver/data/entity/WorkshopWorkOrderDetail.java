@@ -28,6 +28,6 @@ public class WorkshopWorkOrderDetail {
     @JoinColumn(name = "pieceStatus")
     private WorkshopPieceStatus workshopPieceStatus;
 
-    @Column
+    @Column(insertable = false)
     private Byte deleted;
 }

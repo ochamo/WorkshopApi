@@ -12,4 +12,5 @@ import lombok.Setter;
 public class UpdateBrandRequest {
     private Integer Id;
     private String brandName;
+    private Byte deleted;
 }

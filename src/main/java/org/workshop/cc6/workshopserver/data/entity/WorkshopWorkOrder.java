@@ -58,6 +58,6 @@ public class WorkshopWorkOrder {
     @EqualsAndHashCode.Exclude
     private Set<WorkshopPurchaseOrder> workshopPurchaseOrders;
 
-    @Column
+    @Column(insertable = false)
     private Byte deleted;
 }

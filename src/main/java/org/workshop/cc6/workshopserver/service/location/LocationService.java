@@ -2,10 +2,11 @@ package org.workshop.cc6.workshopserver.service.location;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.workshop.cc6.workshopserver.data.entity.WorkshopLocation;
 import org.workshop.cc6.workshopserver.data.repository.LocationRepository;
 import org.workshop.cc6.workshopserver.dto.BaseResponse;
+import org.workshop.cc6.workshopserver.dto.GetListResponse;
 import org.workshop.cc6.workshopserver.dto.location.request.UpdateLocationRequest;
+import org.workshop.cc6.workshopserver.dto.location.response.LocationModel;
 import org.workshop.cc6.workshopserver.dto.mapper.LocationMapper;
 import org.workshop.cc6.workshopserver.dto.user.CreateLocationRequest;
 
@@ -35,5 +36,15 @@ public class LocationService implements ILocationService {
         var location = mapper.workshopLocationToUpdateLocationRequest(req);
         locationRepository.save(location);
         return new BaseResponse("1");
+    }
+
+    @Override
+    public GetListResponse<LocationModel> getLocations() {
+        var entities = locationRepository.findAllNotDeleted();
+        var response = entities
+                .stream()
+                .map(mapper::workshopLocationToGetLocationResponse)
+                .toList();
+        return new GetListResponse<>(response);
     }
 }
