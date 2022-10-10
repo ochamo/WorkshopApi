@@ -31,7 +31,7 @@ public class WorkshopVehicleModel {
     @EqualsAndHashCode.Exclude
     private Set<WorkshopClientVehicle> clientVehicles;
 
-    @Column
+    @Column(insertable = false)
     private Byte deleted;
 
 }

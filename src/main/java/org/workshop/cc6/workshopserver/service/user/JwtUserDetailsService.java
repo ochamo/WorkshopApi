@@ -30,7 +30,7 @@ public class JwtUserDetailsService implements UserDetailsService {
 
         if (user.isPresent()) {
             List<GrantedAuthority> authorities = new ArrayList<>();
-            authorities.add(new SimpleGrantedAuthority(user.get().getUserRoleId().getUserRoleId().toString()));
+            authorities.add(new SimpleGrantedAuthority(user.get().getUserRoleId().getUserRoleDescription()));
             return new User(user.get().getUserEmail(), user.get().getUserPass(), authorities);
         } else {
             throw new UsernameNotFoundException("User not found with username: " + username);

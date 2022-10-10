@@ -47,6 +47,6 @@ public class WorkshopClient {
     @OneToMany(mappedBy = "ratingClient")
     private Set<WorkshopAdvisorRatedService> workshopAdvisorRatedServices;
 
-    @Column
+    @Column(insertable = false)
     private Byte deleted;
 }

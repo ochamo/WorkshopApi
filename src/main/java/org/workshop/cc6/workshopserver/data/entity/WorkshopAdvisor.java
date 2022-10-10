@@ -40,7 +40,7 @@ public class WorkshopAdvisor {
     @Column
     private String advisorAddress;
 
-    @Column
+    @Column(insertable = false)
     private Byte deleted;
 
     @Column

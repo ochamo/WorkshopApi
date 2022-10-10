@@ -31,6 +31,6 @@ public class WorkshopBill {
     @EqualsAndHashCode.Exclude
     private Set<WorkshopBillRow> workshopBillRowSet;
 
-    @Column
+    @Column(insertable = false)
     private Byte deleted;
 }

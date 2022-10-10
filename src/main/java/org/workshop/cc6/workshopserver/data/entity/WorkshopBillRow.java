@@ -31,6 +31,6 @@ public class WorkshopBillRow {
     @Column
     private BigDecimal unitPrice;
 
-    @Column
+    @Column(insertable = false)
     private Byte deleted;
 }

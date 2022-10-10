@@ -10,6 +10,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
+import org.workshop.cc6.workshopserver.data.repository.UserRepository;
 import org.workshop.cc6.workshopserver.dto.user.request.LoginRequest;
 import org.workshop.cc6.workshopserver.dto.user.response.LoginResponse;
 import org.workshop.cc6.workshopserver.util.JwtTokenUtil;
@@ -24,13 +25,18 @@ public class JwtAuthenticationController {
 
     private final JwtUserDetailsService userDetailsService;
 
+    private final UserRepository userRepository;
+
     @Autowired
     public JwtAuthenticationController(AuthenticationManager authenticationManager,
                                        JwtTokenUtil jwtTokenUtil,
-                                       JwtUserDetailsService userDetailsService) {
+                                       JwtUserDetailsService userDetailsService,
+                                       UserRepository userRepository
+    ) {
         this.authenticationManager = authenticationManager;
         this.jwtTokenUtil = jwtTokenUtil;
         this.userDetailsService = userDetailsService;
+        this.userRepository = userRepository;
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
@@ -45,9 +51,10 @@ public class JwtAuthenticationController {
             return new ResponseEntity<>("Not authenticated", HttpStatus.UNAUTHORIZED);
         }
 
+        final var result = userRepository.findByUserEmail(authenticationRequest.getUserEmail());
         final String token = jwtTokenUtil.generateToken(authenticationRequest);
 
-        return ResponseEntity.ok(new LoginResponse(token));
+        return ResponseEntity.ok(new LoginResponse(token, result.get().getUserRoleId().getUserRoleDescription()));
     }
 
     private void authenticate(String username, String password) throws Exception {

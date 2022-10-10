@@ -18,12 +18,12 @@ public class WorkshopOrderStatus {
     private Integer workOrderStatusId;
 
     @Column
-    private String workOrderStatusDescription;
+    private String wokrOrderStatusDescription;
 
     @OneToMany(mappedBy = "workshopOrderStatus")
     @EqualsAndHashCode.Exclude
     private Set<WorkshopWorkOrder> workshopWorkOrders;
 
-    @Column
+    @Column(insertable = false)
     private Byte deleted;
 }

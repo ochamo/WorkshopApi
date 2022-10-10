@@ -34,6 +34,6 @@ public class WorkshopPurchaseOrder {
     @Column
     private Integer quantity;
 
-    @Column
+    @Column(insertable = false)
     private Byte deleted;
 }

@@ -24,6 +24,6 @@ public class WorkshopPieceStatus {
     @EqualsAndHashCode.Exclude
     private Set<WorkshopWorkOrderDetail> workshopPieceStatuses;
 
-    @Column
+    @Column(insertable = false)
     private Byte deleted;
 }

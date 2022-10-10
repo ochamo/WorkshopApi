@@ -32,6 +32,6 @@ public class WorkshopClientVehicle {
     @EqualsAndHashCode.Exclude
     private Set<WorkshopWorkOrder> workshopWorkOrders;
 
-    @Column
+    @Column(insertable = false)
     private Byte deleted;
 }
