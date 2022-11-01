@@ -25,7 +25,7 @@ CREATE TABLE workshopuser(
     FOREIGN KEY (userRoleId) REFERENCES workshopuserrole(userRoleId)
 );
 
-INSERT INTO workshopuser(userRoleId, userEmail, userPass) VALUES(1, 'test@gmail.com', '$2a$12$XTFUEWPTXdxKXnW5/ktys.0qcNAys5BYlsfoyS7g55cpwC5g6YXLC');
+INSERT INTO workshopuser(userRoleId, userEmail, userPass) VALUES(2, 'test@gmail.com', '$2a$12$XTFUEWPTXdxKXnW5/ktys.0qcNAys5BYlsfoyS7g55cpwC5g6YXLC');
 
 CREATE TABLE workshopclient(
   clientId INTEGER AUTO_INCREMENT,
