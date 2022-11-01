@@ -16,6 +16,6 @@ public class UpdateLocationRequest {
     private String locationName;
     private BigDecimal locationLat;
     private BigDecimal locationLong;
-    private String locationAddr;
+    private String locationAddress;
     private Byte deleted;
 }

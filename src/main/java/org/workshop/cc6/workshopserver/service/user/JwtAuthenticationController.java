@@ -17,7 +17,7 @@ import org.workshop.cc6.workshopserver.util.JwtTokenUtil;
 
 @RestController
 @CrossOrigin
-@RequestMapping("/auth")
+@RequestMapping("/login")
 public class JwtAuthenticationController {
 
     private final AuthenticationManager authenticationManager;
@@ -39,7 +39,7 @@ public class JwtAuthenticationController {
         this.userRepository = userRepository;
     }
 
-    @RequestMapping(value = "/login", method = RequestMethod.POST)
+    @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<?> createAuthenticationToken(@RequestBody LoginRequest authenticationRequest) throws Exception {
 
         authenticate(authenticationRequest.getUserEmail(), authenticationRequest.getUserPassword());
@@ -48,13 +48,13 @@ public class JwtAuthenticationController {
                 .loadUserByUsername(authenticationRequest.getUserEmail());
 
         if (userDetails == null) {
-            return new ResponseEntity<>("Not authenticated", HttpStatus.UNAUTHORIZED);
+            return new ResponseEntity<>(new LoginResponse("", "", 0, "0"), HttpStatus.INTERNAL_SERVER_ERROR);
         }
 
         final var result = userRepository.findByUserEmail(authenticationRequest.getUserEmail());
         final String token = jwtTokenUtil.generateToken(authenticationRequest);
 
-        return ResponseEntity.ok(new LoginResponse(token, result.get().getUserRoleId().getUserRoleDescription()));
+        return ResponseEntity.ok(new LoginResponse(token, result.get().getUserRoleId().getUserRoleDescription(), result.get().getUserId(), "1"));
     }
 
     private void authenticate(String username, String password) throws Exception {

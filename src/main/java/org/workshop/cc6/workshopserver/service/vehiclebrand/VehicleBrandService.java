@@ -29,7 +29,7 @@ public class VehicleBrandService implements IVehicleBrandService {
         return new BaseResponse("1");
     }
 
-    @Override
+       @Override
     public BaseResponse updateVehicleBrand(UpdateBrandRequest req) {
         var entity = brandRepository.findById(req.getId());
         if (entity.isPresent()) {
