@@ -27,6 +27,8 @@ public class VehicleLineService implements IVehicleLineService {
     @Override
     public BaseResponse create(CreateVehicleLineRequest req) {
         var entity = mapper.FromCreateReqToVehicleLine(req);
+        var brand = brandRepository.findById(req.getBrandId());
+        entity.setWorkshopVehicleBrand(brand.get());
         repository.save(entity);
         return new BaseResponse("1");
     }

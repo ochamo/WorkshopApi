@@ -21,13 +21,13 @@ public class ClientVehicleController {
     }
 
     @PostMapping
-    public ResponseEntity<?> create(CreateClientVehicle req) {
+    public ResponseEntity<?> create(@RequestBody CreateClientVehicle req) {
         var response = clientVehicleService.create(req);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     @PutMapping
-    public ResponseEntity<?> update(UpdateClientVehicle req) {
+    public ResponseEntity<?> update(@RequestBody UpdateClientVehicle req) {
         var response = clientVehicleService.update(req);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }

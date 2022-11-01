@@ -11,6 +11,6 @@ import java.util.List;
 @Repository
 
 public interface LocationRepository extends JpaRepository<WorkshopLocation, Integer> {
-    @Query("SELECT w FROM WorkshopLocation w WHERE w.deleted <> 1")
+    @Query("SELECT w FROM WorkshopLocation w WHERE w.deleted = 0")
     <S extends WorkshopLocation> List<S> findAllNotDeleted();
 }

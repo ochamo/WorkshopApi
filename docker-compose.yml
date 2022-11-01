@@ -3,7 +3,7 @@ version: "3.8"
 services:
   api_rest:
     container_name: workshop
-    image: ochamodev/workshop_server:1.0.8
+    image: ochamodev/workshop_server:1.0.13
     restart: on-failure
     ports:
       - "3000:8080"
@@ -13,16 +13,16 @@ services:
       - workshopDB
 
   workshopDB:
-    container_name: docker-mysql
+    container_name: mysqlDBTest
     image: mysql:8.0
     restart: on-failure
     networks:
       - mysql_net
     environment:
-      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_ROOT_PASSWORD=Snw9Dv75j0rF9F2FwTPNw0clt
       - MYSQL_ROOT_USER=root
     ports:
-      - "3306:3306"
+      - "3307:3306"
     volumes:
       - "/home/scripts:/docker-entrypoint-initdb.d"
       - "/home/apps/workshop_db_dir:/var/lib/mysql"

@@ -25,8 +25,7 @@ CREATE TABLE workshopuser(
     FOREIGN KEY (userRoleId) REFERENCES workshopuserrole(userRoleId)
 );
 
-INSERT INTO workshopuser(userRoleId, userEmail, userPass) VALUES(1, 'cheleyotto98@gmail.com', '$2a$12$XTFUEWPTXdxKXnW5/ktys.0qcNAys5BYlsfoyS7g55cpwC5g6YXLC');
-SELECT * from workshopuser;
+INSERT INTO workshopuser(userRoleId, userEmail, userPass) VALUES(1, 'test@gmail.com', '$2a$12$XTFUEWPTXdxKXnW5/ktys.0qcNAys5BYlsfoyS7g55cpwC5g6YXLC');
 
 CREATE TABLE workshopclient(
   clientId INTEGER AUTO_INCREMENT,
@@ -51,6 +50,11 @@ CREATE TABLE workshoplocation(
     PRIMARY KEY (locationId)
 );
 
+ALTER TABLE workshoplocation DROP COLUMN locationLatitude;
+ALTER TABLE workshoplocation DROP COLUMN locationLongitude;
+ALTER TABLE workshoplocation ADD COLUMN locationLatitude DECIMAL(20, 8) NOT NULL;
+ALTER TABLE workshoplocation ADD COLUMN locationLongitude DECIMAL(20, 8) NOT NULL;
+
 CREATE TABLE workshopadvisor(
     advisorId INTEGER AUTO_INCREMENT,
     advisorLocation INTEGER NOT NULL,
@@ -59,7 +63,7 @@ CREATE TABLE workshopadvisor(
     advisorLastName VARCHAR(255) NOT NULL,
     advisorDpi VARCHAR(20) NOT NULL,
     advisorPhoneNumber VARCHAR(20) NOT NULL,
-    advisorAddress VARCHAR(20) NOT NULL,
+    advisorAddress TEXT NOT NULL,
     advisorHiringDate DATE NOT NULL,
 	deleted TINYINT DEFAULT 0 NOT NULL,
     PRIMARY KEY (advisorId),
@@ -67,6 +71,9 @@ CREATE TABLE workshopadvisor(
     FOREIGN KEY (advisorLocation) REFERENCES workshoplocation(locationId),
     UNIQUE (userId)
 );
+
+# ALTER TABLE workshopadvisor DROP COLUMN advisorAddress;
+# ALTER TABLE workshopadvisor ADD COLUMN advisorAddress TEXT NOT NULL;
 
 CREATE TABLE workshopvehiclebrand(
     brandId INTEGER AUTO_INCREMENT,

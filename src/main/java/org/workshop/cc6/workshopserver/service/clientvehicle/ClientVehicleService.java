@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.workshop.cc6.workshopserver.data.repository.ClientRepository;
 import org.workshop.cc6.workshopserver.data.repository.ClientVehicleRepository;
+import org.workshop.cc6.workshopserver.data.repository.UserRepository;
 import org.workshop.cc6.workshopserver.data.repository.VehicleModelRepository;
 import org.workshop.cc6.workshopserver.dto.BaseResponse;
 import org.workshop.cc6.workshopserver.dto.GetListResponse;
@@ -18,18 +19,21 @@ public class ClientVehicleService implements IClientVehicleService {
     private ClientVehicleMapper mapper;
     private VehicleModelRepository modelRepository;
     private ClientRepository clientRepository;
+    private UserRepository userRepository;
 
     @Autowired
-    public ClientVehicleService(ClientVehicleRepository repository, ClientVehicleMapper mapper, VehicleModelRepository modelRepository, ClientRepository clientRepository) {
+    public ClientVehicleService(ClientVehicleRepository repository, ClientVehicleMapper mapper, VehicleModelRepository modelRepository, ClientRepository clientRepository, UserRepository userRepository) {
         this.repository = repository;
         this.mapper = mapper;
         this.modelRepository = modelRepository;
         this.clientRepository = clientRepository;
+        this.userRepository = userRepository;
     }
 
     @Override
     public BaseResponse create(CreateClientVehicle dto) {
-        var client = clientRepository.findById(dto.getClientId()).get();
+        var userId = userRepository.findById(dto.getClientId());
+        var client = clientRepository.findByUserId(userId.get().getUserId()).get();
         var model = modelRepository.findById(dto.getVehicleModelId()).get();
         var clientVehicle = mapper.createToEntity(dto);
         clientVehicle.setWorkshopClient(client);

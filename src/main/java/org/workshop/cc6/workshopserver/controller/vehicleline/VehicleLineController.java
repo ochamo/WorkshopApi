@@ -3,7 +3,6 @@ package org.workshop.cc6.workshopserver.controller.vehicleline;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.workshop.cc6.workshopserver.dto.GetListResponse;
 import org.workshop.cc6.workshopserver.dto.vehicleline.CreateVehicleLineRequest;
@@ -22,21 +21,18 @@ public class VehicleLineController {
     }
 
     @PostMapping
-    @PreAuthorize("hasAuthority('advisor')")
-    public ResponseEntity<?> create(CreateVehicleLineRequest req) {
+    public ResponseEntity<?> create(@RequestBody CreateVehicleLineRequest req) {
         var response = vehicleLineService.create(req);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     @PutMapping
-    @PreAuthorize("hasAuthority('advisor')")
-    public ResponseEntity<?> update(UpdateVehicleLineRequest req) {
+    public ResponseEntity<?> update(@RequestBody UpdateVehicleLineRequest req) {
         var response = vehicleLineService.update(req);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     @GetMapping
-    @PreAuthorize("hasAuthority('advisor')")
     public ResponseEntity<GetListResponse<VehicleLineModel>> getAll() {
         var response = vehicleLineService.getAll();
         return new ResponseEntity<>(response, HttpStatus.OK);

@@ -15,5 +15,5 @@ public class CreateLocationRequest {
     private String locationName;
     private BigDecimal locationLatitude;
     private BigDecimal locationLongitude;
-    private String locationAddr;
+    private String locationAddress;
 }
