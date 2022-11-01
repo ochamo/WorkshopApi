@@ -9,7 +9,8 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class CreateVehicleRequest {
+public class UpdateVehicleModelRequest {
     private Integer modelLine;
     private Integer modelYear;
+    private Integer modelId;
 }

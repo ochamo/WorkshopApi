@@ -32,7 +32,7 @@ public class WorkshopAppointment {
     @Column
     private LocalDateTime appointmentDate;
 
-    @Column
+    @Column(name = "appointTime")
     private LocalDateTime appointmentTime;
 
     @Column(insertable = false)

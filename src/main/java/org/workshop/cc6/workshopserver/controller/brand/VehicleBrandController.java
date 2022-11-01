@@ -12,7 +12,7 @@ import org.workshop.cc6.workshopserver.dto.brand.request.UpdateBrandRequest;
 import org.workshop.cc6.workshopserver.service.vehiclebrand.IVehicleBrandService;
 
 @RestController
-@RequestMapping("/brand")
+@RequestMapping("/api/brand")
 public class VehicleBrandController {
     private IVehicleBrandService brandService;
 
@@ -23,7 +23,7 @@ public class VehicleBrandController {
 
     @PreAuthorize("hasAuthority('advisor')")
     @PostMapping
-    public ResponseEntity<?> create(CreateBrandRequest req) {
+    public ResponseEntity<?> create(@RequestBody CreateBrandRequest req) {
         var response = brandService.createVehicleBrand(req);
 
         return new ResponseEntity<>(response, HttpStatus.OK);
@@ -31,7 +31,7 @@ public class VehicleBrandController {
 
     @PreAuthorize("hasAuthority('advisor')")
     @PutMapping
-    public ResponseEntity<?> update(UpdateBrandRequest req) {
+    public ResponseEntity<?> update(@RequestBody UpdateBrandRequest req) {
         var response = brandService.updateVehicleBrand(req);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
