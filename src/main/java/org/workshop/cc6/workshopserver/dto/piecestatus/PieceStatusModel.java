@@ -10,7 +10,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class PieceStatusModel {
-    private Integer pieceId;
+    private Integer pieceStatusId;
     private String pieceStatusDescription;
     private Byte deleted;
 }

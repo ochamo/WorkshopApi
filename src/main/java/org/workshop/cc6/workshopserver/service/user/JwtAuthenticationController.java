@@ -48,13 +48,13 @@ public class JwtAuthenticationController {
                 .loadUserByUsername(authenticationRequest.getUserEmail());
 
         if (userDetails == null) {
-            return new ResponseEntity<>(new LoginResponse("", "", 0, "0"), HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>(new LoginResponse("", (byte)0, 0, "0"), HttpStatus.INTERNAL_SERVER_ERROR);
         }
 
         final var result = userRepository.findByUserEmail(authenticationRequest.getUserEmail());
         final String token = jwtTokenUtil.generateToken(authenticationRequest);
 
-        return ResponseEntity.ok(new LoginResponse(token, result.get().getUserRoleId().getUserRoleDescription(), result.get().getUserId(), "1"));
+        return ResponseEntity.ok(new LoginResponse(token, result.get().getUserRoleId().getUserRoleId(), result.get().getUserId(), "1"));
     }
 
     private void authenticate(String username, String password) throws Exception {
